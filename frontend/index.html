@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TransitOps &mdash; Fleet Dispatch Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<!-- Shared type system (both themes): Ranade (headings) · Satoshi (body/UI) · Space Mono (labels) -->
+<link href="https://api.fontshare.com/v2/css?f[]=ranade@400,500,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Set theme before paint to avoid flash -->
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('transitops-theme'); } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+  })();
+</script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="wordmark">
+      <span class="wordmark-name">TransitOps<span class="wordmark-slash">//</span></span>
+      <span class="wordmark-sub">Fleet dispatch, on the record.</span>
+    </div>
+
+    <div class="login-tabs">
+      <button class="login-tab active" data-mode="login">Sign in</button>
+      <button class="login-tab" data-mode="register">Create account</button>
+    </div>
+
+    <form id="login-form" class="login-form">
+      <label>Email
+        <input type="email" id="login-email" placeholder="manager@transitops.dev" required />
+      </label>
+      <label>Password
+        <input type="password" id="login-password" placeholder="••••••••" required />
+      </label>
+      <div id="login-error" class="form-error"></div>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    </form>
+
+    <form id="register-form" class="login-form hidden">
+      <label>Full name
+        <input type="text" id="reg-name" required />
+      </label>
+      <label>Email
+        <input type="email" id="reg-email" required />
+      </label>
+      <label>Password
+        <input type="password" id="reg-password" required minlength="6" />
+      </label>
+      <label>Role
+        <select id="reg-role">
+          <option value="fleet_manager">Fleet Manager</option>
+          <option value="driver">Driver</option>
+          <option value="safety_officer">Safety Officer</option>
+          <option value="financial_analyst">Financial Analyst</option>
+        </select>
+      </label>
+      <div id="register-error" class="form-error"></div>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+    </form>
+
+    <div class="demo-hint">
+      <div class="demo-hint-title">Demo logins <span>(password: password123)</span></div>
+      <div class="demo-hint-row"><b>manager@transitops.dev</b> — Fleet Manager</div>
+      <div class="demo-hint-row"><b>safety@transitops.dev</b> — Safety Officer</div>
+      <div class="demo-hint-row"><b>finance@transitops.dev</b> — Financial Analyst</div>
+      <div class="demo-hint-row"><b>driver@transitops.dev</b> — Driver</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app-shell" class="app-shell hidden">
+  <div class="news-bar">
+    <span class="news-bar-text">SYSTEM<span class="dot">•</span>Fleet Dispatch Online<span class="dot">•</span>ALL BUSINESS RULES ENFORCED SERVER-SIDE<span class="dot">•</span>SECURE TERMINAL</span>
+  </div>
+  <header class="topbar">
+    <div class="wordmark wordmark-sm">
+      <span class="wordmark-name">TransitOps<span class="wordmark-slash">//</span></span>
+    </div>
+    <nav class="tabnav" id="tabnav">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="vehicles">Vehicles</button>
+      <button class="tab-btn" data-tab="drivers">Drivers</button>
+      <button class="tab-btn" data-tab="trips">Trips</button>
+      <button class="tab-btn" data-tab="maintenance">Maintenance</button>
+      <button class="tab-btn" data-tab="fuel">Fuel &amp; Expenses</button>
+      <button class="tab-btn" data-tab="reports">Reports</button>
+    </nav>
+    <div class="topbar-user">
+      <span class="topbar-clock" id="topbar-clock">--:--:--</span>
+      <span id="user-name"></span>
+      <span id="user-role" class="role-chip"></span>
+      <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content"></main>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<!-- theme toggle — available on both login and app screens -->
+<button id="theme-toggle" class="btn btn-ghost btn-sm theme-toggle" type="button" aria-label="Toggle color theme">
+  <span class="tt-dot"></span><span id="theme-toggle-label">Light mode</span>
+</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    var label = document.getElementById('theme-toggle-label');
+    var root = document.documentElement;
+    function sync() {
+      var isLight = root.getAttribute('data-theme') === 'light';
+      // label shows the theme you'll switch TO
+      label.textContent = isLight ? 'Dark mode' : 'Light mode';
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('transitops-theme', next); } catch (e) {}
+      sync();
+    });
+  })();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
