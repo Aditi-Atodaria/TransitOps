@@ -117,9 +117,9 @@ Many logistics companies still rely on spreadsheets and manual logbooks to manag
 ## Tech Stack
 
 **Frontend:** React + Vite + TypeScript, Tailwind CSS, shadcn/ui
-**Backend:** FastAPI (Python) *(or Node.js + Express)*
+**Backend:** FastAPI (Python) 
 **Database:** PostgreSQL
-**ORM:** SQLModel / SQLAlchemy 2.0 *(or Prisma if using Node)*
+**ORM:** SQLModel / SQLAlchemy 2.0 
 **Auth:** JWT-based authentication with RBAC middleware
 **Charts:** Recharts
 **Export:** CSV (built-in), PDF via ReportLab/WeasyPrint (optional)
