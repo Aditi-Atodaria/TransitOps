@@ -1,6 +1,13 @@
 venv/
+<<<<<<< HEAD
 backend/venv/
 backend/__pycache__/
 backend/*.pyc
 backend/transitops.db
 .DS_Store
+=======
+__pycache__/
+*.pyc
+*.db
+.env
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33

@@ -65,7 +65,10 @@ function showApp() {
   document.getElementById("app-shell").classList.remove("hidden");
   document.getElementById("user-name").textContent = state.user.name;
   document.getElementById("user-role").textContent = state.user.role.replace(/_/g, " ");
+<<<<<<< HEAD
   startClock();
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
   setTab("dashboard");
 }
 
@@ -116,6 +119,7 @@ document.querySelectorAll(".login-tab").forEach((btn) => {
   });
 });
 
+<<<<<<< HEAD
 document.querySelectorAll(".demo-hint-row").forEach((row) => {
   row.title = "Click to fill login";
   row.addEventListener("click", () => {
@@ -128,6 +132,8 @@ document.querySelectorAll(".demo-hint-row").forEach((row) => {
   });
 });
 
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 document.getElementById("logout-btn").addEventListener("click", () => {
   clearSession();
   showLogin();
@@ -151,6 +157,7 @@ function setTab(tab) {
 
 async function render() {
   const main = document.getElementById("main-content");
+<<<<<<< HEAD
   main.innerHTML = `<div class="loading-wrap"><div class="spinner"></div><div class="loading-label">Loading ${escapeHtml(state.tab)}</div></div>`;
   try {
     switch (state.tab) {
@@ -163,11 +170,25 @@ async function render() {
       case "reports": await renderReports(main); break;
     }
     enhanceView(main);
+=======
+  main.innerHTML = `<div class="empty-state">Loading…</div>`;
+  try {
+    switch (state.tab) {
+      case "dashboard": return renderDashboard(main);
+      case "vehicles": return renderVehicles(main);
+      case "drivers": return renderDrivers(main);
+      case "trips": return renderTrips(main);
+      case "maintenance": return renderMaintenance(main);
+      case "fuel": return renderFuel(main);
+      case "reports": return renderReports(main);
+    }
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
   } catch (err) {
     main.innerHTML = `<div class="empty-state">Error: ${escapeHtml(err.message)}</div>`;
   }
 }
 
+<<<<<<< HEAD
 /* Post-render polish: view fade, staggered rows, animated counters */
 function enhanceView(main) {
   main.classList.add("view");
@@ -237,6 +258,8 @@ document.addEventListener("click", (e) => {
   btn.classList.add("rippling");
 });
 
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 /* ---------------------------------------------------------------------- */
 /* Helpers                                                                 */
 /* ---------------------------------------------------------------------- */
@@ -250,6 +273,7 @@ function badge(status) {
   return `<span class="badge badge-${slug}">${escapeHtml(status)}</span>`;
 }
 
+<<<<<<< HEAD
 /* Editorial page header: mono index eyebrow + big display title + actions */
 function pageHead(idx, eyebrow, title, actionsHtml = "") {
   return `
@@ -262,6 +286,8 @@ function pageHead(idx, eyebrow, title, actionsHtml = "") {
     </header>`;
 }
 
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 function fmtMoney(n) {
   return "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 0 });
 }
@@ -327,7 +353,11 @@ async function renderDashboard(main) {
   const recentTrips = trips.slice(0, 6);
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("01", "Overview", "Fleet status board")}
+=======
+    <h2 class="section-title">Fleet status board</h2>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="kpi-board">
       ${kpiTile(kpis.active_vehicles, "Active Vehicles")}
       ${kpiTile(kpis.available_vehicles, "Available")}
@@ -339,7 +369,11 @@ async function renderDashboard(main) {
     </div>
 
     <div class="card-grid">
+<<<<<<< HEAD
       <div class="panel panel-ink">
+=======
+      <div class="panel">
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
         <div class="panel-header"><div class="panel-title">Vehicle registry snapshot</div></div>
         <div class="panel-body" style="padding:0;">
           <table class="data-table">
@@ -384,7 +418,14 @@ async function renderVehicles(main) {
   const canManage = ["fleet_manager"].includes(state.user.role);
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("02", "Registry", "Vehicle registry", canManage ? `<button class="btn btn-primary btn-sm" id="add-vehicle-btn">+ Register vehicle</button>` : "")}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Vehicle registry</h2>
+      ${canManage ? `<button class="btn btn-primary btn-sm" id="add-vehicle-btn">+ Register vehicle</button>` : ""}
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="panel">
       <div class="panel-body" style="padding:0;">
         <table class="data-table">
@@ -481,7 +522,14 @@ async function renderDrivers(main) {
   const canManage = ["fleet_manager", "safety_officer"].includes(state.user.role);
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("03", "Personnel", "Driver management", canManage ? `<button class="btn btn-primary btn-sm" id="add-driver-btn">+ Register driver</button>` : "")}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Driver management</h2>
+      ${canManage ? `<button class="btn btn-primary btn-sm" id="add-driver-btn">+ Register driver</button>` : ""}
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="panel">
       <div class="panel-body" style="padding:0;">
         <table class="data-table">
@@ -573,7 +621,14 @@ async function renderTrips(main) {
   state.cache.trips = trips;
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("04", "Dispatch", "Trip management", `<button class="btn btn-primary btn-sm" id="add-trip-btn">+ Create trip</button>`)}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Trip management</h2>
+      <button class="btn btn-primary btn-sm" id="add-trip-btn">+ Create trip</button>
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="panel">
       <div class="panel-body" style="padding:0;">
         <table class="data-table">
@@ -721,7 +776,14 @@ async function renderMaintenance(main) {
   const eligibleVehicles = vehicles.filter(v => v.status !== "On Trip" && v.status !== "Retired");
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("05", "Service", "Maintenance", canManage ? `<button class="btn btn-primary btn-sm" id="add-maint-btn">+ Log maintenance</button>` : "")}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Maintenance</h2>
+      ${canManage ? `<button class="btn btn-primary btn-sm" id="add-maint-btn">+ Log maintenance</button>` : ""}
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="panel">
       <div class="panel-body" style="padding:0;">
         <table class="data-table">
@@ -802,9 +864,19 @@ async function renderFuel(main) {
   const canManage = ["fleet_manager", "driver", "financial_analyst"].includes(state.user.role);
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("06", "Ledger", "Fuel & expenses", `
         <button class="btn btn-ghost btn-sm" id="add-fuel-btn">+ Fuel log</button>
         <button class="btn btn-primary btn-sm" id="add-expense-btn">+ Expense</button>`)}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Fuel &amp; expenses</h2>
+      <div>
+        <button class="btn btn-ghost btn-sm" id="add-fuel-btn">+ Fuel log</button>
+        <button class="btn btn-primary btn-sm" id="add-expense-btn">+ Expense</button>
+      </div>
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="card-grid">
       <div class="panel">
         <div class="panel-header"><div class="panel-title">Fuel logs</div></div>
@@ -896,7 +968,14 @@ async function renderReports(main) {
   const summary = await api("/reports/summary");
 
   main.innerHTML = `
+<<<<<<< HEAD
     ${pageHead("07", "Analytics", "Reports & analytics", `<a class="btn btn-ghost btn-sm" id="export-csv-btn" href="#">Export CSV ↓</a>`)}
+=======
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h2 class="section-title" style="margin:0;">Reports &amp; analytics</h2>
+      <a class="btn btn-ghost btn-sm" id="export-csv-btn" href="#">Export CSV</a>
+    </div>
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
     <div class="kpi-board" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr));">
       ${kpiTile(summary.fleet_utilization_pct + "%", "Fleet Utilization")}
     </div>

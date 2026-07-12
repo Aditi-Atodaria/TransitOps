@@ -5,6 +5,11 @@ from functools import wraps
 from flask import request, jsonify
 
 JWT_SECRET = os.environ.get("JWT_SECRET", "transitops-hackathon-dev-secret")
+<<<<<<< HEAD
+=======
+if JWT_SECRET == "transitops-hackathon-dev-secret" and os.environ.get("FLASK_ENV") == "production":
+    raise RuntimeError("Set a real JWT_SECRET env var before running in production")
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 JWT_ALGO = "HS256"
 JWT_EXPIRY_HOURS = 12
 
@@ -46,8 +51,16 @@ def require_role(*roles):
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
+<<<<<<< HEAD
             if request.user_role not in roles:
                 return jsonify({"error": f"Requires one of roles: {', '.join(roles)}"}), 403
             return f(*args, **kwargs)
         return wrapper
     return decorator
+=======
+            if getattr(request, "user_role", None) not in roles:
+                return jsonify({"error": f"Requires one of roles: {', '.join(roles)}"}), 403
+            return f(*args, **kwargs)
+        return wrapper
+    return decorator
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33

@@ -3,7 +3,11 @@ import csv
 import io
 from datetime import datetime, date
 
+<<<<<<< HEAD
 from flask import Flask, request, jsonify, Response, send_from_directory
+=======
+from flask import Flask, request, jsonify, Response
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 from flask_cors import CORS
 
 from models import (
@@ -13,7 +17,10 @@ from models import (
 from auth import generate_token, require_auth, require_role
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< HEAD
 FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 
 app = Flask(__name__)
 CORS(app)
@@ -694,6 +701,7 @@ def export_csv():
 
 
 # ---------------------------------------------------------------------------
+<<<<<<< HEAD
 # Frontend entrypoint
 # ---------------------------------------------------------------------------
 
@@ -713,6 +721,8 @@ def serve_app_js():
 
 
 # ---------------------------------------------------------------------------
+=======
+>>>>>>> bf849d6190ec16ca66680f37f6bd79531549ac33
 # Health & bootstrap
 # ---------------------------------------------------------------------------
 
